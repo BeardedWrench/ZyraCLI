@@ -26,7 +26,6 @@ func SendCommandAndPrint(conn net.Conn, cmd string) error {
 		}
 		fmt.Println("🟢 Response:", line)
 
-		// Optional: break if response is a terminal OK/ERR
 		if line == "OK" || strings.HasPrefix(line, "ERR") {
 			break
 		}

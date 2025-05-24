@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 func SendCommandAndPrint(conn net.Conn, cmd string) error {
-	fmt.Println("➡️ Sending command:", cmd)
+	fmt.Println("Sending command:", cmd)
 	_, err := fmt.Fprintln(conn, cmd)
 	if err != nil {
 		return err
@@ -18,13 +18,13 @@ func SendCommandAndPrint(conn net.Conn, cmd string) error {
 	for {
 		line, err := reader.ReadString('\n')
 		if err != nil {
-			return fmt.Errorf("❌ Failed to read response: %w", err)
+			return fmt.Errorf("failed to read response: %w", err)
 		}
 		line = strings.TrimSpace(line)
 		if line == "" {
 			break
 		}
-		fmt.Println("🟢 Response:", line)
+		fmt.Println("Response:", line)
 
 		if line == "OK" || strings.HasPrefix(line, "ERR") {
 			break
@@ -43,7 +43,7 @@ func ConnectAndAuth() (net.Conn, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("✅ Auth successful, connection ready")
+	fmt.Println("Auth successful, connection ready")
 	r := bufio.NewReader(conn)
 	line, _ := r.ReadString('\n')
 	fmt.Println("Server says:", strings.TrimSpace(line))

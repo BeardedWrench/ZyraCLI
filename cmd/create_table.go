@@ -35,7 +35,7 @@ var createTableCmd = &cobra.Command{
 		var buf bytes.Buffer
 		err := json.Compact(&buf, []byte(raw))
 		if err != nil {
-			return fmt.Errorf("❌ Invalid JSON input: %w", err)
+			return fmt.Errorf("Invalid JSON input: %w", err)
 		}
 
 		createCmd := fmt.Sprintf("CREATE_TABLE %s {\"fields\":%s}", tableName, buf.String())
@@ -46,7 +46,6 @@ var createTableCmd = &cobra.Command{
 		}
 		defer conn.Close()
 
-		fmt.Println("🔧 Full CREATE_TABLE command:")
 		fmt.Println(createCmd)
 		return internal.SendCommandAndPrint(conn, createCmd)
 	},
